@@ -6,6 +6,7 @@ use Redirect;
 use App\Models\Propinsi;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Resources\PropinsiResource;
 
 class PropinsiController extends Controller
 {
@@ -38,12 +39,8 @@ class PropinsiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PropinsiResource $request)
     {
-        $this->validate($request, [
-            'nama'      => ['required']
-        ]);
-
         $propinsi       = Propinsi::create($request->all());
         return redirect()->route();
     }
@@ -80,12 +77,8 @@ class PropinsiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PropinsiResource $request, $id)
     {
-        $this->validate($request, [
-            'nama'      => ['required']
-        ]);
-
         $propinsi           = Propinsi::findOrFail($id);
         $propinsi->update($request->all());
         return redirect()->route();
