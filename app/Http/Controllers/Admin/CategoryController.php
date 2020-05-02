@@ -6,6 +6,7 @@ use Redirect;
 use App\Models\Categories;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Resources\CategoriesResource;
 
 class CategoryController extends Controller
 {
@@ -35,18 +36,9 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriesResource $request)
     {
-        $this->validate($request, [
-            'name'          => 'required|string|unique:categories,name',
-            'description'   => 'nullable|string|max:150'
-        ]);
-
-        Categories::create([
-            'name'          => $request->name,
-            'description'   => $request->description
-        ]);
-
+        Categories::create($request->all());
         return response()->json(['status' => 'success']);
     }
 
@@ -80,18 +72,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoriesResource $request, $id)
     {
-        $this->validate($request, [
-            'name'          => 'required|string|unique:categories,name',
-            'description'   => 'nullable|string|max:150'
-        ]);
-
         $category       = Categories::findOrFail($id);
-        $category->update([
-            'name'          => $request->name,
-            'description'   => $request->description
-        ]);
+        $category->update($request->all());
         return response()->json(['status' => 'success']);
     }
 
@@ -108,3 +92,4 @@ class CategoryController extends Controller
         return response()->json(['status' => 'success']);
     }
 }
+ 
