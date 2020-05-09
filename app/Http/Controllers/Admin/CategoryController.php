@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\CategoriesResource;
 use App\Http\Response\DataMaster\Catagories\StoreResponse;
 use App\Http\Response\DataMaster\Catagories\UpdateResponse;
+use App\Http\Response\DataMaster\Catagories\IndexResponse;
 
 class CategoryController extends Controller
 {
@@ -19,7 +20,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category           = Categories::orderBy('created_at', 'DESC')->paginate(10);
+        return new IndexResponse;
     }
 
     /**
@@ -75,7 +76,7 @@ class CategoryController extends Controller
      */
     public function update(CategoriesResource $request, $id)
     {
-        
+        return new UpdateResponse;
     }
 
     /**
