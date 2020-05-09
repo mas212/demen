@@ -7,6 +7,7 @@ use App\Models\Categories;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\CategoriesResource;
+use App\Http\Response\DataMaster\Catagories\StoreResponse;
 
 class CategoryController extends Controller
 {
@@ -38,8 +39,7 @@ class CategoryController extends Controller
      */
     public function store(CategoriesResource $request)
     {
-        Categories::create($request->all());
-        return response()->json(['status' => 'success']);
+        return new StoreResponse;        
     }
 
     /**
