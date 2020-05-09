@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\CategoriesResource;
 use App\Http\Response\DataMaster\Catagories\StoreResponse;
+use App\Http\Response\DataMaster\Catagories\UpdateResponse;
 
 class CategoryController extends Controller
 {
@@ -74,9 +75,7 @@ class CategoryController extends Controller
      */
     public function update(CategoriesResource $request, $id)
     {
-        $category       = Categories::findOrFail($id);
-        $category->update($request->all());
-        return response()->json(['status' => 'success']);
+        
     }
 
     /**
